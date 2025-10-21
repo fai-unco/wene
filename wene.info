@@ -1,0 +1,168 @@
+This is wene.info, produced by makeinfo version 7.2 from wene.texi.
+
+INFO-DIR-SECTION FaI UNCo
+START-INFO-DIR-ENTRY
+* wene: (wene).         Sistema de certificados digitales.
+END-INFO-DIR-ENTRY
+
+
+File: wene.info,  Node: Top,  Next: wene,  Up: (dir)
+
+wene
+****
+
+* Menu:
+
+* wene::
+* Instalación::
+* Correos electrónicos::
+* Roles y usuarios::
+
+-- The Detailed Node Listing --
+
+Roles y usuarios
+
+* Roles::
+* Usuarios y Personas::
+
+
+File: wene.info,  Node: wene,  Next: Instalación,  Prev: Top,  Up: Top
+
+1 wene
+******
+
+Wene es un sistema Web para generar, notificar y almacenar certificados
+digitales.
+
+
+File: wene.info,  Node: Instalación,  Next: Correos electrónicos,  Prev: wene,  Up: Top
+
+2 Instalación
+*************
+
+  1. Clonar repositorio:
+
+          git clone  https://github.com/pkogan/wene.git
+
+  2. ⚠ Para PHP 8 o mayor, se deben remover de <composer.json> los
+     paquetes codeception dentro del grupo «require-dev».  Estos
+     paquetes no son compatibles para esa versión de PHP.
+
+  3. Instalar bibliotecas de PHP con composer.
+
+          composer install
+
+  4. Crear base de datos y configurar la conexión al SGBD
+
+     En MariaDB o MySQL, ejecutar (cambiar usuario y contraseña):
+
+          $ mariadb -u root -p
+          CREATE DATABASE wene;
+          CREATE USER 'wene'@'localhost' IDENTIFIED BY 'wene';
+          GRANT ALL PRIVILEGES ON wene.* TO wene@localhost;
+
+     Para configurar la conexión al SGBD, editar <config/db.php>.
+
+  5. Popular la BD.
+
+          mariadb -u wene -p wene < bd/wenelimpia.sql
+
+  6. ⚠ Agregar columna idExtranjero a la tabla persona.
+
+     Este es un error de desarrollo a corregir.
+
+          alter table persona add column idExtranjero varchar(15) default null;
+
+  7. Crear el directorio <tmp/> dentro del repositorio.
+
+          mkdir tmp
+
+  8. Ejecutar servidor de desarrollo.
+
+          ./yii serve
+
+   Los siguientes son usuarios creado por defecto:
+
+Usuario   Contraseña
+-----------------------
+gestor    gestor
+admin     admin
+
+   ⚠ Eliminar estos usuarios y generar otros con permisos similares.
+
+
+File: wene.info,  Node: Correos electrónicos,  Next: Roles y usuarios,  Prev: Instalación,  Up: Top
+
+3 Correos electrónicos
+**********************
+
+Los administradores pueden asignar a cada dependencia un correo
+electrónico con el cual se envían notificaciones.
+
+
+File: wene.info,  Node: Roles y usuarios,  Prev: Correos electrónicos,  Up: Top
+
+4 Roles y usuarios
+******************
+
+* Menu:
+
+* Roles::
+* Usuarios y Personas::
+
+
+File: wene.info,  Node: Roles,  Next: Usuarios y Personas,  Up: Roles y usuarios
+
+4.1 Roles
+=========
+
+Roles del sistema (entre paréntesis el nombre como figura en el sistema)
+
+administrador (Admin)
+     Puede gestionar usuarios, dependencias, templates y tipos de
+     certificados.
+gestoras/es (Gestor)
+     Puede gestionar actividades, personas y certificados.
+hacedoras/es (Hacedor)
+     Puede gestionar actividades.
+certificantes (Certificante)
+     Puede ver sus certificados.
+invitada/o
+     Puede validar (ver) un certificado.
+
+
+File: wene.info,  Node: Usuarios y Personas,  Prev: Roles,  Up: Roles y usuarios
+
+4.2 Usuarios y Personas
+=======================
+
+En la base de datos hay dos tablas diferentes, a saber:
+
+usuarios
+     Contiene los usuarios que pueden utilizar el login.
+personas
+     Personas que reciben los certificados generados.
+
+   La asociación entre personas y usuarios se realiza por medio del
+registro.  Esto permite realizar certificados a personas sin necesidad
+de que tengan una cuenta o que tengan acceso al sistema en sí.  Sin
+embargo, quien desee tener acceso y ver un listado de sus certificados
+puede registrarse y asociar su persona a su usuario.
+
+
+Tag Table:
+Node: Top195
+Node: wene431
+Node: Instalación605
+Node: Correos electrónicos2075
+Node: Roles y usuarios2345
+Node: Roles2512
+Node: Usuarios y Personas3051
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+Info-documentlanguage: es
+End:

@@ -1,0 +1,161 @@
+* wene
+Wene es un sistema Web para generar, notificar y almacenar certificados digitales.
+
+* Instalación
+
+1. Clonar repositorio:
+   
+   : git clone  https://github.com/pkogan/wene.git
+
+2. \warning{} Para PHP 8 o mayor, se deben remover de file:composer.json los paquetes codeception dentro del grupo "require-dev". Estos paquetes no son compatibles para esa versión de PHP.
+
+3. Instalar bibliotecas de PHP con composer.
+
+   : composer install
+
+4. Crear base de datos y configurar la conexión al SGBD
+
+   En MariaDB o MySQL, ejecutar (cambiar usuario y contraseña):
+
+   : $ mariadb -u root -p
+   : CREATE DATABASE wene;
+   : CREATE USER 'wene'@'localhost' IDENTIFIED BY 'wene';
+   : GRANT ALL PRIVILEGES ON wene.* TO wene@localhost;
+
+   Para configurar la conexión al SGBD, editar file:config/db.php.
+   
+5. Popular la BD.
+
+   : mariadb -u wene -p wene < bd/wenelimpia.sql
+
+6. \warning{} Agregar columna idExtranjero a la tabla persona.
+
+   Este es un error de desarrollo a corregir.
+
+   : alter table persona add column idExtranjero varchar(15) default null;
+
+7. Crear el directorio file:tmp/ dentro del repositorio.
+
+   : mkdir tmp
+
+8. Ejecutar servidor de desarrollo.
+   
+   : ./yii serve
+
+Los siguientes son usuarios creado por defecto:
+
+| Usuario | Contraseña |
+|---------+------------|
+| gestor  | gestor     |
+| admin   | admin      |
+
+\warning{} Eliminar estos usuarios y generar otros con permisos similares.
+
+* Correos electrónicos
+Los administradores pueden asignar a cada dependencia un correo electrónico con el cual se envían notificaciones. 
+
+* Roles y usuarios
+
+** Roles
+Roles del sistema (entre paréntesis el nombre como figura en el sistema)
+
+- administrador (Admin) :: Puede gestionar usuarios, dependencias, templates y tipos de certificados.
+- gestoras/es (Gestor) :: Puede gestionar actividades, personas y certificados.
+- hacedoras/es (Hacedor) :: Puede gestionar actividades.
+- certificantes (Certificante) :: Puede ver sus certificados.
+- invitada/o :: Puede validar (ver) un certificado.
+
+** Usuarios y Personas
+En la base de datos hay dos tablas diferentes, a saber:
+
+- usuarios :: Contiene los usuarios que pueden utilizar el login.
+- personas :: Personas que reciben los certificados generados.
+
+La asociación entre personas y usuarios se realiza por medio del registro. Esto permite realizar certificados a personas sin necesidad de que tengan una cuenta o que tengan acceso al sistema en sí. Sin embargo, quien desee tener acceso y ver un listado de sus certificados puede registrarse y asociar su persona a su usuario.
+
+* Meta :noexport:
+
+# ----------------------------------------------------------------------
+#+TITLE:  wene
+#+SUBTITLE: Sistemas de Certificados Digitales
+#+AUTHOR: Christian Gimenez
+#+DATE:   17 oct 2025
+#+EMAIL: christian.gimenez@fi.uncoma.edu.ar
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
+#+STARTUP: inlineimages hidestars content hideblocks entitiespretty
+#+STARTUP: indent fninline latexpreview
+#+OPTIONS: H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:t *:t <:t ':t
+#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+OPTIONS: tex:imagemagick
+#+TODO: TODO(t!) CURRENT(c!) PAUSED(p!) | DONE(d!) CANCELED(C!@)
+
+# -- Export
+#+LANGUAGE: es
+# #+LINK_UP:   
+# #+LINK_HOME:
+# #+export_file_name: index
+# #+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+
+# -- HTML Export
+# #+INFOJS_OPT: view:info toc:t ftoc:t ltoc:t mouse:underline buttons:t path:libs/org-info.js
+# #+HTML_LINK_UP: index.html
+# #+HTML_LINK_HOME: index.html
+# #+XSLT:
+#
+# -- For ox-twbs or HTML Export
+# -- -- CSS 
+# #+HTML_HEAD: <link href="libs/bootstrap.min.css" rel="stylesheet">
+# -- -- JS Scripts
+# #+HTML_HEAD: <script src="libs/bootstrap.min.js"></script>
+
+
+# -- LaTeX Export
+# #+latex_class: article
+#+latex_compiler: xelatex
+# #+latex_class_options: [12pt, twoside]
+#
+# #+latex_header: \usepackage[spanish]{babel} 
+#+latex_header: \usepackage{csquotes}
+#+latex_header: \usepackage{scrextend}
+#+latex_header: \changefontsizes{14pt}
+#+latex_header: \usepackage[margin=2cm]{geometry}
+#+latex_header: \usepackage{fontspec}
+#+latex_header: \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+#+latex_header: \setmainfont{Latin Modern Sans}
+#+latex_header: \renewcommand{\baselinestretch}{1.25}
+#+latex_header_extra: \hypersetup{colorlinks}
+#
+# -- -- BibLaTex
+# #+latex_header: \usepackage[backend=biber, style=alphabetic, backref=true]{biblatex}
+# #+latex_header: \addbibresource{tangled/biblio.bib}
+# -- -- Tikz
+# #+LATEX_HEADER: \usepackage{tikz}
+# #+LATEX_HEADER: \usetikzlibrary{arrows.meta}
+# #+LATEX_HEADER: \usetikzlibrary{decorations}
+# #+LATEX_HEADER: \usetikzlibrary{decorations.pathmorphing}
+# #+LATEX_HEADER: \usetikzlibrary{shapes.geometric}
+# #+LATEX_HEADER: \usetikzlibrary{shapes.symbols}
+# #+LATEX_HEADER: \usetikzlibrary{positioning}
+# #+LATEX_HEADER: \usetikzlibrary{trees}
+# #+LATEX_HEADER_EXTRA: \usepackage[capitalize]{cleveref}
+
+# --  Info Export
+#+TEXINFO_DIR_CATEGORY: FaI UNCo
+#+TEXINFO_DIR_TITLE: wene: (wene)
+#+TEXINFO_DIR_DESC: Sistema de certificados digitales.
+#+TEXINFO_PRINTED_TITLE: wene
+#+TEXINFO_FILENAME: wene.info
+
+
+# Local Variables:
+# org-hide-emphasis-markers: t
+# org-use-sub-superscripts: "{}"
+# fill-column: 80
+# visual-line-fringe-indicators: t
+# ispell-local-dictionary: "spanish"
+# org-latex-default-figure-position: "tbp"
+# End:

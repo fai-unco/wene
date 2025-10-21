@@ -35,4 +35,9 @@ tests/_support/_generated
 /archivos/adjuntos/
 /archivos/certificados/
 composer.lock
+
+# Ignorando archivos relevantes de configuración.
+# Evitar que se filtren contraseñas a git.
 config/db.php
+config/params.php
+config/web.php

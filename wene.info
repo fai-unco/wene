@@ -61,23 +61,44 @@ File: wene.info,  Node: Instalación,  Next: Correos electrónicos,  Prev: wene,
           CREATE USER 'wene'@'localhost' IDENTIFIED BY 'wene';
           GRANT ALL PRIVILEGES ON wene.* TO wene@localhost;
 
-     Para configurar la conexión al SGBD, editar <config/db.php>.
+  5. Configurar Yii.
 
-  5. Popular la BD.
+     Algunos archivos en el directorio <config/> con sufijo
+     «-example.php» poseen configuraciones privadas y propias de cada
+     servidor.
+
+        • Conexión SGBD
+
+          Para configurar la conexión al SGBD, copiar
+          <config/db-example.php> a <config/db.php> y editarlo con los
+          datos de conexión.
+
+        • Mail y Web
+
+          Copiar <config/web-example.php> a <config/web.php> y editar
+          los datos de conexión de correo electrónico (SMTP) y otras
+          características de la página.
+
+        • Parámetros
+
+          Copiar <config/params-example.php> a <config/params.php> y
+          editarlo.
+
+  6. Popular la BD.
 
           mariadb -u wene -p wene < bd/wenelimpia.sql
 
-  6. ⚠ Agregar columna idExtranjero a la tabla persona.
+  7. ⚠ Agregar columna idExtranjero a la tabla persona.
 
      Este es un error de desarrollo a corregir.
 
           alter table persona add column idExtranjero varchar(15) default null;
 
-  7. Crear el directorio <tmp/> dentro del repositorio.
+  8. Crear el directorio <tmp/> dentro del repositorio.
 
           mkdir tmp
 
-  8. Ejecutar servidor de desarrollo.
+  9. Ejecutar servidor de desarrollo.
 
           ./yii serve
 
@@ -154,10 +175,10 @@ Tag Table:
 Node: Top195
 Node: wene431
 Node: Instalación605
-Node: Correos electrónicos2075
-Node: Roles y usuarios2345
-Node: Roles2512
-Node: Usuarios y Personas3051
+Node: Correos electrónicos2685
+Node: Roles y usuarios2955
+Node: Roles3122
+Node: Usuarios y Personas3661
 
 End Tag Table
 

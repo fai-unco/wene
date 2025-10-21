@@ -22,23 +22,37 @@ Wene es un sistema Web para generar, notificar y almacenar certificados digitale
    : CREATE USER 'wene'@'localhost' IDENTIFIED BY 'wene';
    : GRANT ALL PRIVILEGES ON wene.* TO wene@localhost;
 
-   Para configurar la conexión al SGBD, editar file:config/db.php.
+5. Configurar Yii.
+
+   Algunos archivos en el directorio file:config/ con sufijo "-example.php" poseen configuraciones privadas y propias de cada servidor. 
+
+   - Conexión SGBD
+
+     Para configurar la conexión al SGBD, copiar file:config/db-example.php a file:config/db.php y editarlo con los datos de conexión.
+
+   - Mail y Web
+
+     Copiar file:config/web-example.php a file:config/web.php y editar los datos de conexión de correo electrónico (SMTP) y otras características de la página.
+
+   - Parámetros
+
+     Copiar file:config/params-example.php a file:config/params.php y editarlo.
    
-5. Popular la BD.
+6. Popular la BD.
 
    : mariadb -u wene -p wene < bd/wenelimpia.sql
 
-6. \warning{} Agregar columna idExtranjero a la tabla persona.
+7. \warning{} Agregar columna idExtranjero a la tabla persona.
 
    Este es un error de desarrollo a corregir.
 
    : alter table persona add column idExtranjero varchar(15) default null;
 
-7. Crear el directorio file:tmp/ dentro del repositorio.
+8. Crear el directorio file:tmp/ dentro del repositorio.
 
    : mkdir tmp
 
-8. Ejecutar servidor de desarrollo.
+9. Ejecutar servidor de desarrollo.
    
    : ./yii serve
 

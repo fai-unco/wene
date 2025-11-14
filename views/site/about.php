@@ -15,5 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Bajo licencia GNU GPL.  
     </p>
 
-    <code>Fuentes disponibles en <a href="https://github.com/pkogan/wene">https://github.com/pkogan/wene</a></code>
+    <p>
+      Fuentes disponibles en: <a href="https://github.com/fai-unco/wene">https://github.com/fai-unco/wene</a>
+    </p>
 </div>

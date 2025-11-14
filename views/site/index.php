@@ -61,15 +61,12 @@ $this->title = 'wene - Certificados Facultad de Informática';
                     <!--                    <a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>-->
             </div>
             <div class="col-lg-4">
-                <h2>Válidos en CPE Neuquén</h2>
+                <h2>Válidos en CPE Neuquén y otras instituciones</h2>
 
-                <p>RESOLUCIÓN N°1135 / EXPEDIENTE N°8120-003418/2019 12/9/2019</p>
+                <p>Varias instituciones utilizan y validan certificados utilizando Wene. Entre ellas, 
+                    los certificados del Consejo Provincial de Educación de la Provincia de Neuquén (por Resolución N°1135 / Expediente N°8120-003418/2019 12/9/2019).</p>
 
-                <p><a class="btn btn-default" href="<?= \yii\helpers\Url::base('http') ?>/img/r_1135_19.pdf">Resolución CPE 1135/19 &raquo;</a></p>
-                <h2>Convenios con otras Organizaciones</h2>
-                <p>Se ha realizado convenio para emisión de certificados con Secretaría de extensión de la Facultad de Humanidades <a class="btn btn-default" href="<?= \yii\helpers\Url::base('https') ?>/img/0076_20_AvalCertificadoVirtualExtension.pdf">ResCD FH Nro 076/20 &raquo;</a>
-                    , con Sub-Secretaría de Relaciones Internacionales  <a class="btn btn-default" href="<?= \yii\helpers\Url::base('https') ?>/img/ACTA ACUERDO FI SRRII firmado.pdf">Disp SRRII Nro 003/21 &raquo;</a>
-                   y con la Asociación de Trabajadores de Educación de Neuquen (aten) <a class="btn btn-default" href="<?= \yii\helpers\Url::base('https') ?>/img/convenioatenwene.pdf">Convenio aten-FAIF &raquo;</a></p>
+                <?= $this->render('_convenios', []) ?>
             </div>
         </div>
 

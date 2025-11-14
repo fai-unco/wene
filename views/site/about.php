@@ -18,4 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
       Fuentes disponibles en: <a href="https://github.com/fai-unco/wene">https://github.com/fai-unco/wene</a>
     </p>
+
+    <?= $this->render('_convenios', []) ?>
 </div>

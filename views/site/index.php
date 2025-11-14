@@ -70,5 +70,9 @@ $this->title = 'wene - Certificados Facultad de Informática';
             </div>
         </div>
 
+
+        <div class="container">
+            <?= $this->render('_soporte', []) ?>
+        </div>
     </div>
 </div>

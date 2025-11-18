@@ -142,4 +142,19 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
    public function getDependenciasIn(){
        
    }
+
+    /**
+    ¿El usuario se encuentra registrado en la dependencia dada?
+    
+    @return true si el usuario está registrado en esa dependencia.
+     */
+    public function inDependencia($dependencia_id)
+    {
+        $ud = UsuarioDependencia::findOne([
+            'idUsuario' => $this->id,
+            'idDependencia' => $dependencia_id,
+        ]);
+
+        return $ud != null;
+    }
 }

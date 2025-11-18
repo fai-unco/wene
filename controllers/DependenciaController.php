@@ -36,7 +36,41 @@ class DependenciaController extends Controller {
                     [
                         'allow' => true,
                         'actions' => ['index', 'view', 'update', 'delete', 'create'],
-                        'roles' => [\app\models\Rol::ROL_ADMIN],
+                        /* No hace falta porque aplica solo matchCallback.
+                         'roles' => [\app\models\Rol::ROL_ADMIN,
+                                   \app\models\Rol::ROL_ADMININST],
+                        */
+                        'matchCallback' => function ($rule, $action) {
+                            $idRol = Yii::$app->user->identity->idRol;
+                            if ($idRol == \app\models\Rol::ROL_ADMIN) {
+                                // A admin se permite todas las acciones.
+                                return true;
+                            }
+                            if ($idRol != \app\models\Rol::ROL_ADMININST
+                                || in_array($action->id, ['delete', 'create'])) {
+                                // No se permiten otros roles que ROL_ADMIN ni ROL_ADMININST.
+                                // Tampoco, acciones delete o create.
+                                return false;
+                            }
+
+                            // El usuario es ROL_ADMININT (administrador de la institución)
+                            if ($action->id == 'index') {
+                                // Permitir el index para ROL_ADMININST. En index() se listará solo las intituciones asignadas
+                                // al usuario.
+                                return true;
+                            }
+                            
+                            // Si busca un id de dependencia para el view, update debe ser uno asignado
+                            // sino rechazar.
+                            $id = null; // <- id dependencia
+                            if (Yii::$app->request->isGet) {
+                                $id = Yii::$app->request->get('id');
+                            } else {                                
+                                $id = Yii::$app->request->bodyParam('id');
+                            }
+                            
+                            return Yii::$app->user->identity->inDependencia($id);
+                        }
                     ],
                 ],
             ],

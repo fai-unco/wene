@@ -64,6 +64,18 @@ AppAsset::register($this);
                             ],
                                 
                         ]],
+                        ['label' => 'Admin inst.',
+                         'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMININST,
+                         'items' => [
+                             [
+                                 'label' => 'Dependencias',
+                                 'url' => [ '/dependencia' ],
+                             ],
+                             [
+                                 'label' => 'Templates',
+                                 'url' => [ '/template' ],
+                             ],
+                         ]],
                         ['label' => 'Admin',
                         'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMIN,
                         'items' => [
@@ -76,7 +88,7 @@ AppAsset::register($this);
                                 ['label' => 'Template', 'url' => ['/template'],
                                 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMIN
                             ],
-                                ['label' => 'Tipos Certificdos', 'url' => ['/tipo-certificado'],
+                                ['label' => 'Tipos Certificados', 'url' => ['/tipo-certificado'],
                                 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMIN
                             ],
                             

@@ -84,6 +84,11 @@ class DependenciaController extends Controller {
     public function actionIndex() {
         $searchModel = new DependenciaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMININST) {
+            $dataProvider->query
+                ->joinWith('usuarioDependencias')
+                ->andFilterWhere(['idUsuario' => Yii::$app->user->identity->id]);
+        }
 
         return $this->render('index', [
                     'searchModel' => $searchModel,

@@ -17,6 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Dependencia', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php if (Yii::$app->user->identity->idRol == \app\models\Rol::ROL_ADMININST) { ?>
+        <div class="alert alert-info">
+            Este usuario/a es Administrador/a de la Institución y solo puede ver
+            las dependencias que tiene asociada. Ante cualquier duda acerca de
+            otras dependencias, consulte al administrador del sitio.
+        </div>
+    <?php } ?>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

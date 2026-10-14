@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php if($provider->count==0){?>
-    <p>Solo se aceptan archivos .csv (Separados por comas) de al menos cuatro columnas, sin las cabeceras.  </p>
+    <p>Solo se aceptan archivos .csv (separados por comas o punto y coma) de al menos cuatro columnas, sin las cabeceras.</p>
     <p>Columna 1 **(numérico)-> dni, Columna 2-> observación, Columna 3 *-> Apellido y Nombre, Columna 4 ->mail, Columna 5 -> legajo, Columna 6 **-> ID_Externo</p>
     <p>12345678,"","Parada Pepe","pepe@fi.uncoma.edu.ar","FAI-123","ID-53498"</p>
     <p>* Columnas Obligatorias</p>

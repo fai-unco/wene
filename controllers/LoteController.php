@@ -69,6 +69,9 @@ class LoteController extends Controller {
                 $nombre = '../tmp/lote' . $lote->idLote . '_' . $time . '.' . $model->archivo->extension;
                 $model->archivo->saveAs($nombre);
                 $handle = fopen($nombre, "r");
+                $primeraLinea = fgets($handle);
+                rewind($handle);
+                $delimitador = count(str_getcsv($primeraLinea, ';')) > count(str_getcsv($primeraLinea, ',')) ? ';' : ',';
                 $contadores['error en archivo'] = 0;
                 $contadores['registros'] = 0;
 
@@ -79,7 +82,7 @@ class LoteController extends Controller {
                 $contadores['error al guardar certificado'] = 0;
 
 
-                while (($fileop = fgetcsv($handle, 1000, ",")) !== false) {
+                while (($fileop = fgetcsv($handle, 1000, $delimitador)) !== false) {
                     //print_r($fileop);
                     $contadores['registros']++;
                     $row = [];

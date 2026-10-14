@@ -66,7 +66,7 @@ class PersonaSearch extends Persona
         ]);
 
         $query->andFilterWhere(['like', 'mail', $this->mail])
-            ->andFilterWhere(['like', 'apellidoNombre', $this->apellidoNombre])
+            ->andFilterWhere(['like', new \yii\db\Expression('CONVERT(apellidoNombre USING utf8mb4) COLLATE utf8mb4_general_ci'), $this->apellidoNombre])
             ->andFilterWhere(['like', 'telefono', $this->telefono])
             ->andFilterWhere(['like', 'localidad', $this->localidad])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])

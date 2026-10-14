@@ -86,7 +86,7 @@ class CertificadoSearch extends Certificado
         ]);
 
         $query->andFilterWhere(['like', 'hash', $this->hash])
-              ->andFilterWhere(['like','persona.apellidoNombre', $this->apellidoNombre])
+              ->andFilterWhere(['like', new \yii\db\Expression('CONVERT(persona.apellidoNombre USING utf8mb4) COLLATE utf8mb4_general_ci'), $this->apellidoNombre])
                 ->andFilterWhere(['like','persona.mail', $this->mail])
                 ->andFilterWhere(['like','actividad.nombre', $this->actividad])
                 ->andFilterWhere(['like','dependencia.nombre', $this->dependencia])
